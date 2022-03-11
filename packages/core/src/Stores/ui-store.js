@@ -78,6 +78,9 @@ export default class UIStore extends BaseStore {
     // Welcome modal
     @observable is_welcome_modal_visible = false;
 
+    // Platform comparison table modal
+    @observable is_platform_comparison_table = false;
+
     // Remove MX gaming account modal
     @observable is_close_mx_mlt_account_modal_visible = false;
 
@@ -600,6 +603,15 @@ export default class UIStore extends BaseStore {
 
         if (!is_visible) {
             LocalStore.set('has_viewed_welcome_screen', true);
+        }
+    }
+
+    @action.bound
+    togglePlatformComparisonTable({ is_visible = !this.is_platform_comparison_table }) {
+        this.is_platform_comparison_table = is_visible;
+
+        if (!is_visible) {
+            LocalStore.set('has_platform_comparison_table_screen', true);
         }
     }
 

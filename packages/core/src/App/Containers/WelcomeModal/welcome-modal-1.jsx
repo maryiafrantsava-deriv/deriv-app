@@ -10,9 +10,11 @@ const WelcomeModal = props => {
         is_eu,
         can_have_mf_account,
         can_have_mlt_account,
+        landing_companies,
         toggleWelcomeModal,
         history,
         toggleShouldShowMultipliersOnboarding,
+        togglePlatformComparisonTable,
     } = props;
     const switchPlatform = React.useCallback(
         ({ route, should_show_multiplier } = {}) => {
@@ -32,6 +34,8 @@ const WelcomeModal = props => {
                     switchPlatform={switchPlatform}
                     can_have_mf_account={can_have_mf_account}
                     can_have_mlt_account={can_have_mlt_account}
+                    landing_companies={landing_companies}
+                    togglePlatformComparisonTable={togglePlatformComparisonTable}
                 />
             </ThemedScrollbars>
         </Modal>
@@ -44,7 +48,9 @@ export default withRouter(
         is_eu: client.is_eu,
         can_have_mf_account: client.can_have_mf_account,
         can_have_mlt_account: client.can_have_mlt_account,
+        landing_companies: client.landing_companies,
         toggleWelcomeModal: ui.toggleWelcomeModal,
         toggleShouldShowMultipliersOnboarding: ui.toggleShouldShowMultipliersOnboarding,
+        togglePlatformComparisonTable: ui.togglePlatformComparisonTable,
     }))(WelcomeModal)
 );

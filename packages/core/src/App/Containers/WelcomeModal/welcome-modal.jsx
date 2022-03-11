@@ -11,7 +11,8 @@ const WelcomeModal = ({ is_eu, landing_companies, residence }) => {
         return <WelcomeModal1 />;
     }
 
-    return <WelcomeModal2 />;
+    // return <WelcomeModal2 />; //revert back
+    return <WelcomeModal1 />;
 };
 
 export default connect(({ client }) => ({

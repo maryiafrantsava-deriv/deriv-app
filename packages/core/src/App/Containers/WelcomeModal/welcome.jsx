@@ -13,7 +13,15 @@ import NotSure from 'Assets/SvgComponents/onboarding/not-sure.svg';
 import NotSureMobile from 'Assets/SvgComponents/onboarding/not-sure-mobile.svg';
 import WelcomeItem from './welcome-item.jsx';
 
-const Welcome = ({ is_eu, country_standpoint, switchPlatform, can_have_mf_account, can_have_mlt_account }) => {
+const Welcome = ({
+    is_eu,
+    country_standpoint,
+    switchPlatform,
+    can_have_mf_account,
+    can_have_mlt_account,
+    togglePlatformComparisonTable,
+    landing_companies,
+}) => {
     const is_uk = country_standpoint.is_united_kingdom;
     const is_mlt_mf = can_have_mf_account && can_have_mlt_account;
     const is_mf_only = can_have_mf_account && !can_have_mlt_account;
@@ -47,6 +55,19 @@ const Welcome = ({ is_eu, country_standpoint, switchPlatform, can_have_mf_accoun
         }
         return mf_options;
     };
+    const switchModalWindow = () => {
+        const shortcode =
+            landing_companies?.financial_company?.shortcode || landing_companies?.gaming_company?.shortcode;
+
+        // if (shortcode === 'svg') {//revert back
+        togglePlatformComparisonTable({ is_visible: true });
+        // }else{
+        //     switchPlatform({ route: routes.mt5 });
+        // }
+
+        console.log('switchModalWindow');
+    };
+
     return (
         <>
             <DesktopWrapper>
@@ -68,7 +89,7 @@ const Welcome = ({ is_eu, country_standpoint, switchPlatform, can_have_mf_accoun
                             components={[<Text key={0} weight='bold' as='strong' color='prominent' />]}
                         />
                     }
-                    onClick={() => switchPlatform({ route: routes.mt5 })}
+                    onClick={() => switchModalWindow()}
                     icon={<CFDs />}
                     mobileIcon={<CFDsMobile />}
                     options={cfdOptions()}

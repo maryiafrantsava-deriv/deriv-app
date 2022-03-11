@@ -7,6 +7,9 @@ import { connect } from 'Stores/connect';
 const AccountSignupModal = React.lazy(() =>
     import(/* webpackChunkName: "account-signup-modal" */ '../AccountSignupModal')
 );
+const PlatformComparisonTable = React.lazy(() =>
+    import(/* webpackChunkName: "platform-comparison-table" */ '../PlatformComparisonTable')
+);
 const CloseMxMltAccountModal = React.lazy(() =>
     import(/* webpackChunkName: "close-mx-mlt-account-modal" */ '../CloseMxMltAccountModal')
 );
@@ -32,6 +35,7 @@ const AppModals = ({
     is_close_mx_mlt_account_modal_visible,
     is_eu,
     is_logged_in,
+    is_platform_comparison_table,
 }) => {
     const url_params = new URLSearchParams(useLocation().search);
     const url_action_param = url_params.get('action');
@@ -45,7 +49,9 @@ const AppModals = ({
             ComponentToLoad = <ResetOrUnlinkPasswordModal />;
             break;
         case 'signup':
-            ComponentToLoad = <AccountSignupModal />;
+            // ComponentToLoad = <AccountSignupModal />;
+            // ComponentToLoad = <PlatformComparisonTable />;
+            ComponentToLoad = <WelcomeModal />; //revert back comment
             break;
         default:
             if (is_set_residence_modal_visible) {
@@ -69,6 +75,10 @@ const AppModals = ({
         ComponentToLoad = <RealityCheckModal />;
     }
 
+    if (is_platform_comparison_table) {
+        ComponentToLoad = <PlatformComparisonTable />;
+    }
+
     return (
         <>
             <RedirectNoticeModal is_logged_in={is_logged_in} is_eu={is_eu} portal_id='popup_root' />
@@ -86,4 +96,5 @@ export default connect(({ client, ui }) => ({
     is_eu: client.is_eu,
     is_logged_in: client.is_logged_in,
     is_reality_check_visible: client.is_reality_check_visible,
+    is_platform_comparison_table: ui.is_platform_comparison_table,
 }))(AppModals);
